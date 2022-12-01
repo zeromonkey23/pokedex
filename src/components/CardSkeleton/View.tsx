@@ -2,12 +2,12 @@ import React from 'react';
 
 const CardSkeleton = () => {
   return(
-    <div className="py-10 animate-pulse">
-      <div className="bg-white w-60 inline-block rounded-xl relative shadow p-4">
+    <div className="py-10">
+      <div className="bg-white w-60 inline-block rounded-xl relative shadow p-4 animate-pulse">
         <div className="w-56 inline-block rounded-xl relative">
           <div className="relative mb-4">
             <div
-              className="flex justify-center items-center h-28 w-52 bg-gray-300 rounded">
+              className="flex justify-center items-center h-32 w-52 bg-gray-300 rounded">
               <svg className="w-12 h-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
                 fill="currentColor" viewBox="0 0 640 512">
                 <path
@@ -16,11 +16,16 @@ const CardSkeleton = () => {
             </div>
           </div>
         </div>
-        <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-8 mb-4"></div>
-        <div className="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-28 mb-4"></div>
-        <div className="mt-2">
-          <div className="h-4 bg-gray-200 rounded dark:bg-gray-700 w-14 inline-block mr-2"></div>
-          <div className="h-4 bg-gray-200 rounded dark:bg-gray-700 w-14 inline-block"></div>
+        <div className="h-4 bg-gray-200 rounded-full w-28 mb-4"></div>
+        <div className="mt-8 flex justify-between">
+          <div>
+            <div className="h-5 bg-gray-200 rounded w-14 mr-2 mb-2"></div>
+            <div className="h-2 bg-gray-200 rounded w-14 mr-2"></div>
+          </div>
+          <div>
+            <div className="h-5 bg-gray-200 rounded w-14 mr-2 mb-2"></div>
+            <div className="h-2 bg-gray-200 rounded w-14 mr-2"></div>
+          </div>
         </div>
       </div>
     </div>

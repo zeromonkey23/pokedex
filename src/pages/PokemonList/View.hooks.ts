@@ -7,21 +7,30 @@ import type {InputParams, NamedAPIResourceList} from '../../types/api';
 import type {Pokemon} from './View.types';
 
 const useView = () => {
-  const [params, setParams] = useState<InputParams>({
-    limit: 9, offset: 0
-  });
+  const params: InputParams = { limit: 9, offset: 0 };
   const [loading, setLoading] = useState(false);
-
   const [pokemons, setPokemons] = useState<Array<Pokemon>>([]);
+  const [listUrl, setListUrl] = useState('');
+  const [hasData, setHasData] = useState(true);
 
-  const getData = async () => {
+  window.onscroll = () => {
+    if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
+      if (hasData) {
+        getData(listUrl);
+      }
+    }
+  };
+
+  const getData = async (url?: string) => {
     setLoading(true);
     const pokemonData: Array<Pokemon> = [];
-    await fetch(`${API_URL}/pokemon?${createParams(params)}`, {
+    await fetch(url || `${API_URL}/pokemon?${createParams(params)}`, {
       cache: 'default',
     })
       .then(res => res.json())
       .then(async (data: NamedAPIResourceList) => {
+        setListUrl(data.next || '');
+        setHasData(Boolean(data.next));
         await Promise.all(
           data.results.map((async (el) => {
             const pokemon = await getPokemonData(el.url);

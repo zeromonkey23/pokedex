@@ -15,7 +15,7 @@ const Card = (props: CardProps) => {
           <div className="relative -mt-20 -translate-y-0.5 transform">
             <img src={image} alt={`Image of ${name}`}/>
           </div>
-          <div className="bg-slate-500 rounded-b-xl flex justify-between p-2 font-mono">
+          <div className="bg-slate-500 rounded-b-xl flex justify-between p-2 font-mono shadow-inner">
             <span className="text-white">#{String(id).padStart(3, '0')}</span>
             <Types className="justify-end" types={types}/>
           </div>
@@ -23,11 +23,11 @@ const Card = (props: CardProps) => {
         <div className="mt-1 text-2xl font-extrabold">{toTitleCase(name)}</div>
         <div className="mt-6 flex justify-between text-center">
           <div>
-            <p className="text-xl font-bold">{height/10}<sub>m</sub></p>
+            <p className="text-xl font-bold">{height/10}<span className="text-xs">m</span></p>
             <p className="text-xs text-gray-400">Height</p>
           </div>
           <div>
-            <p className="text-xl font-bold">{weight/10}<sub>kg</sub></p>
+            <p className="text-xl font-bold">{weight/10}<span className="text-xs">kg</span></p>
             <p className="text-xs text-gray-400">Weight</p>
           </div>
         </div>
