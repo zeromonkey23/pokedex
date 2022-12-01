@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {BrowserRouter, Routes} from 'react-router-dom';
+import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
+import PokemonList from './pages/PokemonList';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
@@ -12,9 +13,11 @@ ReactDOM.render(
     <BrowserRouter>
       <React.Suspense fallback={<div>Loading</div>}>
         <Routes>
+          <Route path="/" element={<App/>}>
+            <Route path="/pokemon-list" element={<PokemonList/>}/>
+          </Route>
         </Routes>
       </React.Suspense>
-      <App/>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
