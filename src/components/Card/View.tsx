@@ -13,7 +13,7 @@ const Card = (props: CardProps) => {
       <div className="bg-white w-60 inline-block rounded-xl relative shadow-xl p-4">
         <div className="w-54 inline-block rounded-xl relative shadow-inner shadow-black mb-2" style={getPokemonBG(types)}>
           <div className="relative -mt-20 -translate-y-0.5 transform">
-            <img src={image} alt={`Image of ${name}`}/>
+            <img className="drop-shadow-2xl shadow-black" src={image} alt={`Image of ${name}`}/>
           </div>
           <div className="bg-slate-500 rounded-b-xl flex justify-between p-2 font-mono shadow-inner">
             <span className="text-white">#{String(id).padStart(3, '0')}</span>

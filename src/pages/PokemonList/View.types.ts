@@ -32,6 +32,9 @@ export interface Sprites {
   front_shiny: string;
   front_shiny_female?: string;
   other: {
+    home: {
+      front_default: string;
+    },
     'official-artwork': {
       front_default: string;
     }
@@ -80,9 +83,16 @@ export interface Pokemon {
   order: number;
   past_types: Array<PokemonTypePast>;
   species: NamedResource;
+  speciesDetail: Species | null;
   sprites: Sprites;
   stats: Array<Stat>;
   types: Array<Type>;
   stringTypes: string[];
   weight: number;
+}
+
+export interface Species {
+  id: number;
+  name: string;
+  generation: NamedResource;
 }

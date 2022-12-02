@@ -14,7 +14,7 @@ ReactDOM.render(
       <React.Suspense fallback={<div>Loading</div>}>
         <Routes>
           <Route path="/" element={<App/>}>
-            <Route path="/pokemon-list" element={<PokemonList/>}/>
+            <Route path="/" element={<PokemonList/>}/>
           </Route>
         </Routes>
       </React.Suspense>

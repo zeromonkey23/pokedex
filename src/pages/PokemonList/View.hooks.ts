@@ -1,10 +1,13 @@
-import {useEffect, useState} from 'react';
+import type {ChangeEvent} from 'react';
+import { useEffect, useState} from 'react';
 
 import {API_URL} from '../../constants/api';
+import {GEN_OPT_MAP} from '../../constants/optionMap';
 import createParams from '../../helpers/createParams';
 import type {InputParams, NamedAPIResourceList} from '../../types/api';
+import type {DropdownOption} from '../../types/forms';
 
-import type {Pokemon} from './View.types';
+import type {Pokemon, Species} from './View.types';
 
 const useView = () => {
   const params: InputParams = { limit: 9, offset: 0 };
@@ -12,6 +15,16 @@ const useView = () => {
   const [pokemons, setPokemons] = useState<Array<Pokemon>>([]);
   const [listUrl, setListUrl] = useState('');
   const [hasData, setHasData] = useState(true);
+  const [genOption, setGenOption] = useState<Array<DropdownOption>>([]);
+  const [typeOption, setTypeOption] = useState<Array<DropdownOption>>([]);
+  const [searchValue, setSearchValue] = useState('');
+  const [genFilterValue, setGenFilterValue] = useState('');
+  const [typeFilterValue, setTypeFilterValue] = useState('');
+  const [filterValue, setFilterValue] = useState({
+    search: '',
+    generation: '',
+    type: '',
+  });
 
   window.onscroll = () => {
     if (window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight) {
@@ -21,7 +34,8 @@ const useView = () => {
     }
   };
 
-  const getData = async (url?: string) => {
+  const getData = async (url?: string, opt = {applyFilter: false}) => {
+    const {applyFilter} = opt;
     setLoading(true);
     const pokemonData: Array<Pokemon> = [];
     await fetch(url || `${API_URL}/pokemon?${createParams(params)}`, {
@@ -43,14 +57,19 @@ const useView = () => {
       }, (error) => {
         console.error(error.message);
       });
-    setPokemons((prevState) => [...prevState, ...pokemonData]);
+    const sortedPokemon = pokemonData.sort((a, b) => a.id - b.id);
     setLoading(false);
+    if (applyFilter) {
+      return sortedPokemon;
+    }
+    setPokemons((prevState) => [...prevState, ...sortedPokemon]);
   };
 
   const getPokemonData = async (url: string) => {
     return await fetch(url, {cache: 'default'})
       .then(res => res.json())
-      .then((data: Pokemon) => {
+      .then(async (data: Pokemon) => {
+        data.speciesDetail = await getPokemonSpecies(data.species.url);
         return data;
       }, (error) => {
         console.error(error.message);
@@ -58,11 +77,105 @@ const useView = () => {
       });
   };
 
+  const getPokemonSpecies = async (url: string) => {
+    return await fetch(url, {cache: 'default'})
+      .then(res => res.json())
+      .then((data: Species) => {
+        return data;
+      }, (error) => {
+        console.error(error.message);
+        return null;
+      });
+  };
+
+  const getGenerationData = async () => {
+    fetch(`${API_URL}/generation`, {cache: 'default'})
+      .then(res => res.json())
+      .then((data: NamedAPIResourceList) => {
+        setGenOption(data.results.map((el) => ({
+          label: GEN_OPT_MAP[el.name],
+          value: el.name,
+        })));
+      }, (error) => {
+        console.error(error.message);
+      });
+  };
+
+  const getTypeData = async () => {
+    fetch(`${API_URL}/type`, {cache: 'default'})
+      .then(res => res.json())
+      .then((data: NamedAPIResourceList) => {
+        setTypeOption(data.results.map((el) => ({
+          label: el.name,
+          value: el.name,
+        })));
+      }, (error) => {
+        console.error(error.message);
+      });
+  };
+
+  const onChangeInputSearch = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(e.target.value);
+  };
+
+  const onChangeGenFilter = (e: ChangeEvent<HTMLSelectElement>) => {
+    const {value} = e.target;
+    setGenFilterValue(value);
+    onChangeFilter({generation: value});
+  };
+
+  const onChangeTypeFilter = (e: ChangeEvent<HTMLSelectElement>) => {
+    const {value} = e.target;
+    setTypeFilterValue(value);
+    onChangeFilter({type: value});
+  };
+
+  const onChangeFilter = (filter: {search?: string, generation?: string, type?: string}) => {
+    setFilterValue((prevState) => ({...prevState, ...filter}));
+    onApplyFilter({...filterValue, ...filter});
+  };
+
+  const onApplyFilter = async (filter: {search?: string, generation?: string, type?: string}) => {
+    setPokemons([]);
+    const {search, type, generation} = filter;
+    if (search || type || generation) {
+      let filteredPokemon: Array<Pokemon> = await getData(`${API_URL}/pokemon?limit=1200&offset=0`, {applyFilter: true}) || [];
+      if (search) {
+        filteredPokemon = filteredPokemon.filter((el) => el.name.toLowerCase().includes(search.toLowerCase()));
+      }
+      if (generation) {
+        filteredPokemon = filteredPokemon.filter((el) => el.speciesDetail?.generation.name === generation);
+      }
+      if (type) {
+        filteredPokemon = filteredPokemon.filter((el) => el.stringTypes.includes(type));
+      }
+      setPokemons(filteredPokemon);
+    }
+    if (!search && !type && !generation) {
+      getData(`${API_URL}/pokemon?limit=9&offset=0`);
+    }
+  };
+
+  /*useEffect for initializing data on the first load*/
   useEffect(() => {
     getData();
+    getGenerationData();
+    getTypeData();
   }, []);
 
-  return {pokemons, loading};
+  return {
+    pokemons,
+    loading,
+    genOption,
+    typeOption,
+    searchValue,
+    genFilterValue,
+    typeFilterValue,
+    onChangeGenFilter,
+    onChangeTypeFilter,
+    onChangeInputSearch,
+    onChangeFilter
+  };
 };
 
 export default useView;
