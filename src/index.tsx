@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
+import Compare from './pages/Compare';
 import PokemonDetail from './pages/PokemonDetail';
 import PokemonList from './pages/PokemonList';
 import App from './App';
@@ -17,6 +18,7 @@ ReactDOM.render(
           <Route path="/" element={<App/>}>
             <Route path="/" element={<PokemonList/>}/>
             <Route path="/pokemon/:name" element={<PokemonDetail/>}/>
+            <Route path="/compare" element={<Compare/>}/>
           </Route>
         </Routes>
       </React.Suspense>
