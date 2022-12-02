@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
+import PokemonDetail from './pages/PokemonDetail';
 import PokemonList from './pages/PokemonList';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
@@ -15,6 +16,7 @@ ReactDOM.render(
         <Routes>
           <Route path="/" element={<App/>}>
             <Route path="/" element={<PokemonList/>}/>
+            <Route path="/pokemon/:name" element={<PokemonDetail/>}/>
           </Route>
         </Routes>
       </React.Suspense>

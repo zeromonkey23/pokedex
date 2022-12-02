@@ -1,4 +1,4 @@
-import type {NamedResource} from '../../types/api';
+import type {NamedResource} from './api';
 
 export interface Ability {
   ability: NamedResource;

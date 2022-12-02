@@ -32,11 +32,10 @@ function App() {
           </ul>
         </div>
       </aside>
-      <section className="text-gray-600 body-font font-sans ml-56 pt-12 pr-6">
-        <h1 className="font-bold leading-tight text-4xl px-5 pt-5 mt-0 mb-5">Pokémon List</h1>
+      <section className="text-gray-600 body-font font-sans ml-56 pt-20 pr-6">
         <div
           className="absolute -z-10 inset-0 bg-[url(assets/grid.svg)] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
-        <div className="container p-10 mb-24 mx-auto bg-white/60 rounded-2xl shadow-2xl">
+        <div className="container p-6 mb-24 mx-auto bg-white/60 rounded-2xl shadow-2xl">
           <Outlet/>
         </div>
       </section>

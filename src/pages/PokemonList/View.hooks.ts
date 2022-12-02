@@ -6,8 +6,7 @@ import {GEN_OPT_MAP} from '../../constants/optionMap';
 import createParams from '../../helpers/createParams';
 import type {InputParams, NamedAPIResourceList} from '../../types/api';
 import type {DropdownOption} from '../../types/forms';
-
-import type {Pokemon, Species} from './View.types';
+import type {Pokemon, Species} from '../../types/pokemon';
 
 const useView = () => {
   const params: InputParams = { limit: 9, offset: 0 };

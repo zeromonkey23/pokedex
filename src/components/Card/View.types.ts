@@ -6,4 +6,6 @@ export interface CardProps {
   className?: string;
   height: number;
   weight: number;
+  hoverable?: boolean;
+  onClick?: () => void;
 }

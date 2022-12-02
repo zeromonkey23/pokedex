@@ -7,9 +7,9 @@ import Types from '../Types/View';
 import type {CardProps} from './View.types';
 
 const Card = (props: CardProps) => {
-  const {name, types, image, id, className = '', height, weight} = props;
+  const {name, types, image, id, className = '', height, weight, hoverable = true} = props;
   return (
-    <div className={'py-10 hover:-translate-y-8 transition ease-in-out delay-150 hover:cursor-pointer ' + className}>
+    <div className={`transition ease-in-out delay-150 ${hoverable ? 'hover:cursor-pointer hover:-translate-y-8' : ''} ${className}`}>
       <div className="bg-white w-60 inline-block rounded-xl relative shadow-xl p-4">
         <div className="w-54 inline-block rounded-xl relative shadow-inner shadow-black mb-2" style={getPokemonBG(types)}>
           <div className="relative -mt-20 -translate-y-0.5 transform">
