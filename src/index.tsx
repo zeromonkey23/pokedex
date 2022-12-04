@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 
+import Bookmark from './pages/BookmarkList';
 import Compare from './pages/Compare';
 import PokemonDetail from './pages/PokemonDetail';
 import PokemonList from './pages/PokemonList';
@@ -19,6 +20,7 @@ ReactDOM.render(
             <Route path="/" element={<PokemonList/>}/>
             <Route path="/pokemon/:name" element={<PokemonDetail/>}/>
             <Route path="/compare" element={<Compare/>}/>
+            <Route path="/bookmark" element={<Bookmark/>}/>
           </Route>
         </Routes>
       </React.Suspense>

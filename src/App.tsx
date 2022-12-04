@@ -29,6 +29,12 @@ function App() {
                 <span className="ml-3">Compare</span>
               </a>
             </li>
+            <li>
+              <a href="/bookmark"
+                className="flex items-center p-2 text-base font-normal rounded-lg hover:bg-gray-100">
+                <span className="ml-3">Bookmark</span>
+              </a>
+            </li>
           </ul>
         </div>
       </aside>
