@@ -19,6 +19,7 @@ const Card = (props: CardProps) => {
     weight,
     hoverable = true,
     hasBookmarked = false,
+    showActionBtn = false,
     actionBtnText = 'See Detail',
     showBookmark = false,
     onClick = noop,
@@ -48,7 +49,7 @@ const Card = (props: CardProps) => {
           </div>
         </div>
         <div className="mt-6 flex justify-end items-center">
-          <Button className="mr-2" onClick={onClick}>{actionBtnText}</Button>
+          {showActionBtn && <Button className="mr-2" onClick={onClick}>{actionBtnText}</Button>}
           {showBookmark && <div onClick={onClickBookmark} className="hover:cursor-pointer">
             {!hasBookmarked ?
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"

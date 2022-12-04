@@ -52,7 +52,8 @@ const View = () => {
           <Card key={`pokemon-${i}`} name={pokemon.name} id={pokemon.id} className="mx-2 py-10"
             types={pokemon.stringTypes} image={pokemon.sprites.other.home.front_default}
             height={pokemon.height} weight={pokemon.weight} onClick={() => window.open(`pokemon/${pokemon.name}`)}
-            showBookmark onClickBookmark={() => onClickBookmark(pokemon)} hasBookmarked={pokemon.hasBookmarked}/>
+            showBookmark onClickBookmark={() => onClickBookmark(pokemon)} hasBookmarked={pokemon.hasBookmarked}
+            showActionBtn/>
         ))}
         {loading && [...Array(9)].map((el, i) => (<CardSkeleton key={`card-skeleton-${i}`}/>))}
       </div>

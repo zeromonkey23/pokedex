@@ -9,6 +9,7 @@ export interface CardProps {
   hoverable?: boolean;
   showBookmark?: boolean;
   hasBookmarked?: boolean;
+  showActionBtn?: boolean;
   actionBtnText?: string;
   onClick?: () => void;
   onClickBookmark?: () => void;

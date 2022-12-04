@@ -37,7 +37,7 @@ const View = () => {
             <Card name={pokemon.name} id={pokemon.id} className="mx-2 py-10" key={`pokemon-${i}`}
               types={pokemon.stringTypes} image={pokemon.sprites.other.home.front_default}
               height={pokemon.height} weight={pokemon.weight} onClick={() => onRemoveSelectedPokemon(pokemon)}
-              actionBtnText="Remove"/>
+              actionBtnText="Remove" showActionBtn/>
             <Abilities abilities={pokemon.abilities || []} className="mb-4"/>
             <Stats stats={pokemon.stats || []} className="mb-4"/>
             <Moves moves={pokemon.moves || []}/>
@@ -74,7 +74,7 @@ const View = () => {
           <Card name={pokemon.name} id={pokemon.id} className="mx-2 py-10" key={`pokemon-${i}`}
             types={pokemon.stringTypes} image={pokemon.sprites.other.home.front_default}
             height={pokemon.height} weight={pokemon.weight} onClick={() => onSelectPokemon(pokemon)}
-            actionBtnText="Compare"/>
+            actionBtnText="Compare" showActionBtn/>
         ))}
         {loading && [...Array(9)].map((el, i) => (<CardSkeleton key={`card-skeleton-${i}`}/>))}
       </div>
