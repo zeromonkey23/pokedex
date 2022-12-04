@@ -49,9 +49,9 @@ const useView = () => {
           data.results.map((async (el) => {
             const pokemon = await getPokemonData(el.url);
             if (pokemon) {
-              const pokemonList = JSON.parse(localStorage.getItem('myPokemonList') || '') as Array<Pokemon>;
+              const pokemonList = JSON.parse(String(localStorage.getItem('myPokemonList'))) as Array<Pokemon>;
               pokemon.stringTypes = pokemon.types.map(el => el.type.name);
-              pokemon.hasBookmarked = Boolean(pokemonList.find(el => el.id === pokemon.id));
+              pokemon.hasBookmarked = Boolean((pokemonList || []).find(el => el.id === pokemon.id));
               pokemonData.push(pokemon);
             }
           }))
@@ -160,7 +160,7 @@ const useView = () => {
 
   const onClickBookmark = (pokemon: Pokemon) => {
     const {hasBookmarked, id} = pokemon;
-    const pokemonList = JSON.parse(localStorage.getItem('myPokemonList') || '') as Array<Pokemon>;
+    const pokemonList = JSON.parse(String(localStorage.getItem('myPokemonList'))) as Array<Pokemon> || [];
     const newPokemonList = hasBookmarked ? pokemonList.filter(el => el.id !== id) : [...pokemonList, pokemon];
     localStorage.setItem('myPokemonList', JSON.stringify(newPokemonList));
     setPokemons(pokemons.map(el => {
