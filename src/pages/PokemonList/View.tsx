@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
 
 import Card from '../../components/Card/View';
 import CardSkeleton from '../../components/CardSkeleton/View';
@@ -20,7 +19,8 @@ const View = () => {
     onChangeGenFilter,
     onChangeTypeFilter,
     onChangeInputSearch,
-    onChangeFilter
+    onChangeFilter,
+    onClickBookmark
   } = useView();
   return (
     <>
@@ -49,11 +49,10 @@ const View = () => {
       </div>
       <div className="flex flex-wrap justify-around">
         {pokemons.map((pokemon, i) => (
-          <Link to={`pokemon/${pokemon.name}`} key={`pokemon-${i}`}>
-            <Card name={pokemon.name} id={pokemon.id} className="mx-2 py-10"
-              types={pokemon.stringTypes} image={pokemon.sprites.other.home.front_default}
-              height={pokemon.height} weight={pokemon.weight}/>
-          </Link>
+          <Card key={`pokemon-${i}`} name={pokemon.name} id={pokemon.id} className="mx-2 py-10"
+            types={pokemon.stringTypes} image={pokemon.sprites.other.home.front_default}
+            height={pokemon.height} weight={pokemon.weight} onClick={() => window.open(`pokemon/${pokemon.name}`)}
+            showBookmark onClickBookmark={() => onClickBookmark(pokemon)} hasBookmarked={pokemon.hasBookmarked}/>
         ))}
         {loading && [...Array(9)].map((el, i) => (<CardSkeleton key={`card-skeleton-${i}`}/>))}
       </div>

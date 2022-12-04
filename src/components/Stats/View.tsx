@@ -14,8 +14,8 @@ const Stats = (props: StatsProps) => {
         {stats.map((stat, i) => (
           <div className="flex items-center" key={`stats-${i}`}>
             <span className="w-40 text-left mr-2">{STAT_MAP[stat.stat.name]}</span>
-            <span className="w-10 text-left font-bold">{stat.base_stat}</span>
-            <Progress progress={(stat.base_stat/255) * 100}/>
+            <span className="w-10 text-right font-bold mr-2">{stat.base_stat}</span>
+            <Progress className="w-50" progress={(stat.base_stat/255) * 100}/>
           </div>
         ))}
       </div>

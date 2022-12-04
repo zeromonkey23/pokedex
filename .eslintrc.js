@@ -65,6 +65,7 @@ module.exports = {
     ],
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',
-    '@typescript-eslint/consistent-type-imports': 'warn'
+    '@typescript-eslint/consistent-type-imports': 'warn',
+    'react/display-name': 'off',
   }
 };

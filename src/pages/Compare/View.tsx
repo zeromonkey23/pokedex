@@ -30,13 +30,14 @@ const View = () => {
   return (
     <>
       <h1 className="font-bold leading-tight text-4xl px-5 pt-5 mt-0 mb-5">Pokémon Comparison</h1>
-      <p>{selectedPokemons.length === 0 ? 'Select pokemon below to compare' : 'Click pokemon to remove'}</p>
+      <p>{selectedPokemons.length === 0 ? 'Select pokemon below to compare' : ''}</p>
       <div className="flex justify-around min-h-[200px] w-full overflow-x-auto py-10">
         {selectedPokemons.map((pokemon, i) => (
           <div key={`selected-pokemon-${i}`} className="flex flex-col">
             <Card name={pokemon.name} id={pokemon.id} className="mx-2 py-10" key={`pokemon-${i}`}
               types={pokemon.stringTypes} image={pokemon.sprites.other.home.front_default}
-              height={pokemon.height} weight={pokemon.weight} onClick={() => onRemoveSelectedPokemon(pokemon)}/>
+              height={pokemon.height} weight={pokemon.weight} onClick={() => onRemoveSelectedPokemon(pokemon)}
+              actionBtnText="Remove"/>
             <Abilities abilities={pokemon.abilities || []} className="mb-4"/>
             <Stats stats={pokemon.stats || []} className="mb-4"/>
             <Moves moves={pokemon.moves || []}/>
@@ -72,7 +73,8 @@ const View = () => {
         {pokemons.map((pokemon, i) => (
           <Card name={pokemon.name} id={pokemon.id} className="mx-2 py-10" key={`pokemon-${i}`}
             types={pokemon.stringTypes} image={pokemon.sprites.other.home.front_default}
-            height={pokemon.height} weight={pokemon.weight} onClick={() => onSelectPokemon(pokemon)}/>
+            height={pokemon.height} weight={pokemon.weight} onClick={() => onSelectPokemon(pokemon)}
+            actionBtnText="Compare"/>
         ))}
         {loading && [...Array(9)].map((el, i) => (<CardSkeleton key={`card-skeleton-${i}`}/>))}
       </div>

@@ -1,5 +1,7 @@
 import type {ChangeEvent} from 'react';
 import { useEffect, useState} from 'react';
+import type { SweetAlertOptions } from 'sweetalert2';
+import Swal from 'sweetalert2';
 
 import {API_URL} from '../../constants/api';
 import {GEN_OPT_MAP} from '../../constants/optionMap';
@@ -158,7 +160,12 @@ const useView = () => {
 
   const onSelectPokemon = (pokemon: Pokemon) => {
     if (selectedPokemons.length === 3) {
-      alert('Maximum pokemon to compare is 3');
+      Swal.fire({
+        title: 'Failed to add to comparison!',
+        text: 'Maximum pokemon to compare is 3!',
+        icon: 'warning',
+        confirmButtonText: 'OK',
+      } as SweetAlertOptions);
       return;
     }
     let filterPokemon = [...pokemons];

@@ -1,5 +1,6 @@
 import type {ChangeEvent} from 'react';
 import { useEffect, useState} from 'react';
+import Swal from 'sweetalert2';
 
 import {API_URL} from '../../constants/api';
 import {GEN_OPT_MAP} from '../../constants/optionMap';
@@ -48,7 +49,9 @@ const useView = () => {
           data.results.map((async (el) => {
             const pokemon = await getPokemonData(el.url);
             if (pokemon) {
+              const pokemonList = JSON.parse(localStorage.getItem('myPokemonList') || '') as Array<Pokemon>;
               pokemon.stringTypes = pokemon.types.map(el => el.type.name);
+              pokemon.hasBookmarked = Boolean(pokemonList.find(el => el.id === pokemon.id));
               pokemonData.push(pokemon);
             }
           }))
@@ -155,6 +158,27 @@ const useView = () => {
     }
   };
 
+  const onClickBookmark = (pokemon: Pokemon) => {
+    const {hasBookmarked, id} = pokemon;
+    const pokemonList = JSON.parse(localStorage.getItem('myPokemonList') || '') as Array<Pokemon>;
+    const newPokemonList = hasBookmarked ? pokemonList.filter(el => el.id !== id) : [...pokemonList, pokemon];
+    localStorage.setItem('myPokemonList', JSON.stringify(newPokemonList));
+    setPokemons(pokemons.map(el => {
+      if (el.id === id) {
+        el.hasBookmarked = !hasBookmarked;
+      }
+      return el;
+    }));
+    Swal.mixin({
+      toast: true,
+      text: hasBookmarked ? 'Pokemon removed from bookmark': 'Pokemon successfully bookmarked',
+      position: 'top-right',
+      iconColor: 'white',
+      showConfirmButton: false,
+      timer: 1500,
+    }).fire();
+  };
+
   /*useEffect for initializing data on the first load*/
   useEffect(() => {
     getData();
@@ -173,7 +197,8 @@ const useView = () => {
     onChangeGenFilter,
     onChangeTypeFilter,
     onChangeInputSearch,
-    onChangeFilter
+    onChangeFilter,
+    onClickBookmark
   };
 };
 

@@ -89,6 +89,7 @@ export interface Pokemon {
   types: Array<Type>;
   stringTypes: string[];
   weight: number;
+  hasBookmarked?: boolean;
 }
 
 export interface Species {
