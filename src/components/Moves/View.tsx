@@ -1,6 +1,6 @@
 import React from 'react';
 
-import slugToTitle from '../../helpers/slugToTitle';
+import slugToTitle from '../../utils/slugToTitle';
 
 import type {MovesProps} from './View.types';
 

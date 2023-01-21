@@ -1,6 +1,6 @@
 import React from 'react';
 
-import noop from '../../helpers/noop';
+import noop from '../../utils/noop';
 
 import useView from './View.hooks';
 import type {InputSearchProps} from './View.types';

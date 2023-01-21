@@ -9,6 +9,45 @@ import type {DropdownOption} from '../../types/forms';
 import type {Pokemon} from '../../types/pokemon';
 
 const useView = () => {
+  interface Student {
+    name: string;
+    class: string;
+    courseTaken: course;
+  }
+
+  interface course {
+    id: string;
+    name: any;
+    scu: any;
+  }
+
+  const student: Student = {
+    name: 'Jonathan',
+    class: '10B',
+    courseTaken: {
+      id: 0,
+      name: "Math",
+      scu: '4'
+    }
+  };
+
+  const getStudentName = (name: string) => {
+    return student.name ? student.name : ''
+  };
+
+  var getCourseName = () => {
+    if (student) {
+      return student?.courseTaken?.name;
+    } else {
+      return 'Student not taking any course'
+    }
+  }
+
+  getCourseName()
+  getStudentName();
+
+
+
   const [pokemons, setPokemons] = useState<Array<Pokemon>>([]);
   const [genOption, setGenOption] = useState<Array<DropdownOption>>([]);
   const [typeOption, setTypeOption] = useState<Array<DropdownOption>>([]);

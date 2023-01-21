@@ -1,8 +1,8 @@
 import React from 'react';
 
 import getPokemonBG from '../../helpers/getPokemonBG';
-import noop from '../../helpers/noop';
-import toTitleCase from '../../helpers/toTitleCase';
+import noop from '../../utils/noop';
+import toTitleCase from '../../utils/toTitleCase';
 import Button from '../Button/View';
 import Types from '../Types/View';
 

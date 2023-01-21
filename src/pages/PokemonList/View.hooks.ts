@@ -4,10 +4,10 @@ import Swal from 'sweetalert2';
 
 import {API_URL} from '../../constants/api';
 import {GEN_OPT_MAP} from '../../constants/optionMap';
-import createParams from '../../helpers/createParams';
 import type {InputParams, NamedAPIResourceList} from '../../types/api';
 import type {DropdownOption} from '../../types/forms';
 import type {Pokemon, Species} from '../../types/pokemon';
+import createParams from '../../utils/createParams';
 
 const useView = () => {
   const params: InputParams = { limit: 9, offset: 0 };
@@ -198,7 +198,8 @@ const useView = () => {
     onChangeTypeFilter,
     onChangeInputSearch,
     onChangeFilter,
-    onClickBookmark
+    onClickBookmark,
+    getData,
   };
 };
 
