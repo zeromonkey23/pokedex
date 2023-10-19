@@ -10,7 +10,7 @@ function App() {
         <div className="container flex flex-wrap items-center justify-between">
           <a href="/" className="flex items-center">
             <img src={require('./assets/logo.png')} className="h-12 mr-3 sm:h-9" alt="Pokemon Logo"/>
-            <span className="self-center text-2xl font-extrabold whitespace-nowrap text-neutral-100">Pokédex Govtech</span>
+            <span className="self-center text-2xl font-extrabold whitespace-nowrap text-neutral-100">Pokédex</span>
           </a>
         </div>
       </nav>
